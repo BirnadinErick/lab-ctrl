@@ -4,5 +4,26 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.exclude": {
+			"*.code-workspace": true,
+			"**/.vscode": true,
+			"**/*_env": true
+		},
+		"files.watcherExclude": {
+			"**/__pycache__": true,
+			"**/.vscode": true,
+			"**/*_env": true,
+			"**/migrations": true,
+			"**/utils": true
+		},
+		"search.exclude": {
+			"**/__pycache__": true,
+			"**/.vscode": true,
+			"**/*_env": true,
+			"**/migrations": true,
+			"**/utils": true
+		},
+		"python.pythonPath": "parent_env\\Scripts\\python.exe"
+	}
 }
