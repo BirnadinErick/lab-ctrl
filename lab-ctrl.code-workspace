@@ -24,6 +24,6 @@
 			"**/migrations": true,
 			"**/utils": true
 		},
-		"python.pythonPath": "parent_env\\Scripts\\python.exe"
+		"python.pythonPath": "child_env\\Scripts\\python.exe"
 	}
 }
