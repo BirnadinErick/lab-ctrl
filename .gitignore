@@ -11,4 +11,4 @@ db.sqlite3
 **/Debug
 **/x*
 **/.vs
-*.exe
+**/x*/
