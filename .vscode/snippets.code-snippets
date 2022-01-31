@@ -32,5 +32,18 @@
 			"if __name__ == '__main__':",
 			"    pass"
 		]
+	},
+	"Try-Except-Else Block":{
+		"scope": "python",
+		"prefix": "tee",
+		"body":[
+			"try:",
+			"    $1",
+			"except:",
+			"    pass",
+			"else:",
+			"    pass"
+		]	
 	}
+
 }

@@ -1,12 +1,17 @@
+# Imports
 import os
 import json
 import zipfile
+import subprocess
 
 from fastapi import FastAPI, Response, status
 
 from contexts import RequestContext
 from commands import shutdown
-from utils import decrypt, encrypt
+from utils import decrypt, encrypt, update_daemon
+
+
+# BEGIN
 
 api:FastAPI = FastAPI()
 version:float = 1.0
@@ -34,30 +39,20 @@ async def update(req:RequestContext, response:Response):
         del data    # clear the data sice we don't need it anymore
 
     # if update available
-        # spawn aria2c and get the update file
-        # TODO: Change to Popen
-        try:
-            os.system(f"aria2c.exe http://{mother}:2003/{up_file}")
-
-            # spin new process and update
-                # decode the update file
-                # unzip the update file
-            updates:list = []
-            with zipfile.ZipFile(up_file, "r") as zip:
-                updates = zip.namelist()
-                zip.extractall()
-                # update
-                    # get list of updated files
-                    # replace the new files for the old ones
-                # run tests (if applicable)
-            print(updates)
-        except Exception as e:
-            message = e.__str__()
+        if not update_daemon(up_file, f"http://{mother}:2003/"):
+            data = {"msg":"update_failed"}    
         else:
-            pass
-        finally:
-            payload, key = encrypt(message.join(f"\nID was: {id}"))
-            return {"id" : key, "payload":payload}
+            data = {"msg":"update_ok"}
+        
+        jData = json.dumps(data)
+        enc_data, key = encrypt(jData)
+
+        return {"id":key, "payload":enc_data}
     else:
         response.status_code = status.HTTP_304_NOT_MODIFIED
         return {"ver":version}
+
+# END
+
+if __name__ == '__main__':
+    pass
