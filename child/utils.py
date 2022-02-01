@@ -1,29 +1,14 @@
 # Imports
 import subprocess
 import os
-import zipfile
-import logging
 
 from cryptography.fernet import Fernet
 
-# Constants
-MOTHER_UNRESPONSIVE:int = 1
-MOTHER_FORBIDDEN:int = 2
-MOTHER_LOST:int = 3
-MOTHER_REFUSED:int = 4
-BAD_ARG:int = 5
-FILE_LOST:int = 6
-UPDATE_SRC_RETRIEVAL_FAILED:int = 2008
-OLD_BACKUP_FILES_PRESENT:int = 19
-ACCESS_DENIAL:int = 2000
-UNKNOWN_ERROR:int = 2003
-
-LOG_CONFIG = "[%(name)s]:(%(asctime)s):: %(message)s"
-
-# Global Variables
-ErrorTracebacks:list = []
+from ERRORCODES import UPDATE_SRC_RETRIEVAL_FAILED
 
 # BEGIN
+
+ErrorTracebacks:list = []
 
 def encrypt(data:str) -> tuple(bytes, bytes):
     """
@@ -43,31 +28,6 @@ def decrypt(encData:bytes, key:bytes) -> bytes:
     fernet = Fernet(key)
     data = fernet.decrypt(encData)
     return data
-
-def update_daemon(src:str, address:str) -> bool:
-    """
-    Daemon-like function to update the child
-
-    :param src: name of the update_source file(a lab_ctrl file)
-    :param address: URI of the mother who hosts the `src` file
-    """
-    # configure a logger for logs
-    logger = logging.getLogger("UPDATE_DAEMON")
-    logging.basicConfig(
-        format=LOG_CONFIG,
-        level=logging.DEBUG
-    )
-    
-    # get the src
-    if not download(address+src):
-        logger.error("Download Failed")
-        return False
-    logger.info("Download Done")
-
-    # decode the lab_ctrl file
-    # get the names and hases of the file
-    # one-by-one, get the files
-    
 
     
 def download(target:str) -> bool:
