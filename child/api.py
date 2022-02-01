@@ -35,7 +35,7 @@ async def update(req:RequestContext, response:Response, bgTasks:BackgroundTasks)
         up_file = data["up_file"]
 
         # if update available, update
-        bgTasks.add_task(update_daemon, src=up_file, address=mother)
+        bgTasks.add_task(update_daemon, src=up_file, address=f"http://{mother}:2003/")
 
         data = {"msg": "Updated added to background tasks!"}
         jData = json.dumps(data)
