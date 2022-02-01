@@ -54,5 +54,5 @@ async def update(req:RequestContext, response:Response):
 
 # END
 
-if __name__ == '__main__':
-    pass
+if __name__ != '__main__':
+    raise Exception("Not to be used as a module, but as a standalone(partial) script")
