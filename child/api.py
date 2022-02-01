@@ -1,14 +1,12 @@
 # Imports
-import os
 import json
-import zipfile
-import subprocess
 
 from fastapi import FastAPI, Response, status
 
 from contexts import RequestContext
 from commands import shutdown
-from utils import decrypt, encrypt, update_daemon
+from utils import decrypt, encrypt
+from update import update_daemon
 
 
 # BEGIN
@@ -23,9 +21,8 @@ async def root():
 
 @api.post("/update", status_code=status.HTTP_202_ACCEPTED)
 async def update(req:RequestContext, response:Response):
-    message:str = str()
-    id:bytes = req.id
-    
+    global version
+
     # decrypt the payload
     payload = decrypt(req.payload, req.id)
     
@@ -36,12 +33,12 @@ async def update(req:RequestContext, response:Response):
     # check the version
     if data["ver"] > version:
         up_file = data["up_file"]
-        del data    # clear the data sice we don't need it anymore
 
     # if update available
         if not update_daemon(up_file, f"http://{mother}:2003/"):
             data = {"msg":"update_failed"}    
         else:
+            version = data["ver"]
             data = {"msg":"update_ok"}
         
         jData = json.dumps(data)
@@ -53,6 +50,3 @@ async def update(req:RequestContext, response:Response):
         return {"ver":version}
 
 # END
-
-if __name__ != '__main__':
-    raise Exception("Not to be used as a module, but as a standalone(partial) script")

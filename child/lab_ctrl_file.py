@@ -36,7 +36,7 @@ def encode(infile:str, outfile:str) -> bool:
     else:
         return True
 
-def decode(infile:str) -> dict:
+def decode_lab_ctrl(infile:str) -> dict:
     """
     takes a lab_ctrl file and gives a python object the file was representing
 
@@ -80,7 +80,7 @@ if __name__ == '__main__':
             continue
         elif op == 2:
             inFile = input("Name of the input: ")
-            content:dict = decode(inFile+".lab_ctrl")
+            content:dict = decode_lab_ctrl(inFile+".lab_ctrl")
             if not content:
                 print("something went wrong during decoding!")
             else:

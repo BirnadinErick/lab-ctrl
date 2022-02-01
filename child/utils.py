@@ -1,7 +1,10 @@
 # Imports
+from asyncio.log import logger
+from modulefinder import LOAD_CONST
 import subprocess
 import os
 import hashlib
+import logging
 
 from cryptography.fernet import Fernet
 
@@ -11,8 +14,16 @@ from ERRORCODES import UPDATE_SRC_RETRIEVAL_FAILED
 
 ErrorTracebacks:list = []
 
+logger = logging.getLogger("UTILS")
+LOG_CONFIG = "[%(name)s]:(%(asctime)s):: %(message)s"
+logging.basicConfig(
+    format=LOG_CONFIG,
+    level=logging.DEBUG
+)
+
+
 def check_integrity(input_bytes:bytes, checksum:bytes) -> bool:
-    
+    logger.info("Checking integrity...")
     md5_engine = hashlib.md5()
     
     # calc the checksum
@@ -21,7 +32,7 @@ def check_integrity(input_bytes:bytes, checksum:bytes) -> bool:
     # compare the checksum
     return checksum == md5_engine.hexdigest()
 
-def encrypt(data:str) -> tuple(bytes, bytes):
+def encrypt(data:str):
     """
     Encrypts a given data(later encoded into bytes) using fernet(from cryptography lib) and 
     gives back the key used to encrypt and encrypted data.
@@ -52,6 +63,7 @@ def download(target:str) -> bool:
     download_proc:subprocess.CompletedProcess = None    # object retrieve error etc. if downloader fails
     try:
         # command to spin up downloader.exe and get the `target`
+        logger.debug(f"Downloading {target}...")
         download_proc = subprocess.run(
                 args=["downloader.exe", target],    # cmd to revoke
                 check=True,                         # validates whether return code was zero, if not then raises CalledProcessError
@@ -60,6 +72,7 @@ def download(target:str) -> bool:
                 text=True                           # capture STOUT/STERR in text-mode instead of binary-mode
             )
     except subprocess.CalledProcessError:
+        logger.debug(f"Downloading {target} failed!")
         # record the logs for diagnosis
         with open(f"download__{target}.log", "x") as log:
             log.write(download_proc.stdout)
@@ -70,6 +83,7 @@ def download(target:str) -> bool:
         
         return False
     else:
+        logger.debug(f"Successfully downloaded {target}.")
         return True
 
 # END
@@ -78,7 +92,7 @@ if __name__ == '__main__':
 
     # test encrypt/decrypt funcs
     import json
-    data = {"ver":2.1, "up_file": "update.zip"}
+    data = {"ver":2.1, "up_file": "update_catalog.lab_ctrl"}
     data_s = json.dumps(data)
 
     encData, key = encrypt(data_s)    

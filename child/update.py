@@ -3,7 +3,7 @@ from importlib.resources import contents
 import os
 import logging
 
-from lab_ctrl_file import decode
+from lab_ctrl_file import decode_lab_ctrl
 from utils import check_integrity, download
 from ERRORCODES import (
     ACCESS_DENIAL,
@@ -17,7 +17,6 @@ from ERRORCODES import (
 LOG_CONFIG = "[%(name)s]:(%(asctime)s):: %(message)s"
 
 ErrorTracebacks:list = []
-
 
 def update_daemon(src:str, address:str) -> bool:
     """
@@ -35,27 +34,36 @@ def update_daemon(src:str, address:str) -> bool:
     
     # get the src
     if not download(address+src):
-        logger.error("Download Failed")
+        logger.error("Update catalog download Failed!")
         return False
-    logger.info("Download Done")
+    logger.info("Update catalog download Done.")
 
     # decode the lab_ctrl file
-    update_catalog:dict = decode(src)
-    
+    update_catalog:dict = decode_lab_ctrl(src)
+    logger.debug(f"Got the update catalog of {update_catalog}")
+
     # get the names and hashes of the file
     files_to_update:dict = update_catalog["updates"]
 
     # backup the files(needed ones only)
+    files_need_backup:str = [
+        file
+        for file in os.listdir(os.getcwd())
+        if file in files_to_update.keys()
+    ]
     try:
-        for file in files_to_update.keys():
+        for file in files_need_backup:
             filename, fileext = file.split(".")[0], file.split(".")[1]
             os.rename(
                 src=file,
                 dst=(filename + "__old" + "." + fileext)
             )
+            logger.debug(f"Back up of {file} made.")
     except PermissionError:
         ErrorTracebacks.append(ACCESS_DENIAL)
         raise Exception("Permission denied during back up")
+    except FileNotFoundError:
+        raise Exception()
     except Exception as e:
         logger.error(e)
         ErrorTracebacks.append(BACKUP_FAILED)
@@ -84,8 +92,10 @@ def update_daemon(src:str, address:str) -> bool:
                 contents = content_file.read()
             
             if check_integrity(contents, checksum):
+                logger.debug(f"Integrity of {file} is intact")
                 continue
             else:
+                logger.debug(f"{file} seems to be corrupted!")
                 ErrorTracebacks.append(FILE_CORRUPTED)
                 raise Exception(f"File {file} Corrupted")
     except Exception as e:
@@ -93,6 +103,32 @@ def update_daemon(src:str, address:str) -> bool:
         return False
     else:
         logger.info(f"Child is updated to {update_catalog['version']} successfully!")
+    
+    # sanitize -----------------------------------------------------------------------------
+    logger.debug("Sanitizing cwd...")
+    # 1. remove the backups
+    try:
+        logger.debug("Removing backups...")
+        for file in files_to_update.keys():
+            filename, fileext = file.split(".")[0], file.split(".")[1]
+            os.remove((filename + "__old" + "." + fileext))
+    except PermissionError:
+        ErrorTracebacks.append(ACCESS_DENIAL)
+        raise Exception("Permission denied during back up")
+    except Exception as e:
+        logger.error(e)
+        ErrorTracebacks.append(BACKUP_FAILED)
+        return False
+    else:
+        logger.info("Back up sanitized successfully!")
+    
+    # 2. release unneccessary memory areas
+    del update_catalog
+    del logger
+    del files_to_update
+    # end sanitize ---------------------------------------------------------------------------
+
+    return True
     
 
 # END
