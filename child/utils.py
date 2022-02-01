@@ -1,6 +1,7 @@
 # Imports
 import subprocess
 import os
+import hashlib
 
 from cryptography.fernet import Fernet
 
@@ -9,6 +10,16 @@ from ERRORCODES import UPDATE_SRC_RETRIEVAL_FAILED
 # BEGIN
 
 ErrorTracebacks:list = []
+
+def check_integrity(input_bytes:bytes, checksum:bytes) -> bool:
+    
+    md5_engine = hashlib.md5()
+    
+    # calc the checksum
+    md5_engine.update(input_bytes)
+
+    # compare the checksum
+    return checksum == md5_engine.hexdigest()
 
 def encrypt(data:str) -> tuple(bytes, bytes):
     """

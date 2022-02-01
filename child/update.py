@@ -1,13 +1,15 @@
 # Imports
+from importlib.resources import contents
 import os
 import logging
 
 from lab_ctrl_file import decode
-from utils import download
+from utils import check_integrity, download
 from ERRORCODES import (
     ACCESS_DENIAL,
     BACKUP_FAILED,
-    UPDATE_SRC_RETRIEVAL_FAILED
+    UPDATE_SRC_RETRIEVAL_FAILED,
+    FILE_CORRUPTED
 )
 
 # BEGIN
@@ -49,7 +51,7 @@ def update_daemon(src:str, address:str) -> bool:
             filename, fileext = file.split(".")[0], file.split(".")[1]
             os.rename(
                 src=file,
-                dst=filename+"__old"+"."+fileext
+                dst=(filename + "__old" + "." + fileext)
             )
     except PermissionError:
         ErrorTracebacks.append(ACCESS_DENIAL)
@@ -63,7 +65,7 @@ def update_daemon(src:str, address:str) -> bool:
     
     # one-by-one, get the files
     try:
-        for file in files_to_update:
+        for file in files_to_update.keys():
             download(address+file)
     except Exception as e:
         logger.error(e)
@@ -74,15 +76,23 @@ def update_daemon(src:str, address:str) -> bool:
     
     # check the integrity
     try:
-        for file in files_to_update:
+        for file, checksum in files_to_update.items():
             # check and raise exception in case of corruption
-            pass
-        
-        pass
-    except:
-        pass
+            contents:bytes
+            # get the file content
+            with open(file, "rb") as content_file:
+                contents = content_file.read()
+            
+            if check_integrity(contents, checksum):
+                continue
+            else:
+                ErrorTracebacks.append(FILE_CORRUPTED)
+                raise Exception(f"File {file} Corrupted")
+    except Exception as e:
+        logger.error(e)
+        return False
     else:
-        pass
+        logger.info(f"Child is updated to {update_catalog['version']} successfully!")
     
 
 # END
