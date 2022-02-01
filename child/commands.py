@@ -8,4 +8,3 @@ async def shutdown():
         args="dispatcher.exe",
         cwd=cwd
     )
-    

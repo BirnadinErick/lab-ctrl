@@ -47,52 +47,6 @@ def update_daemon(src:str, address:str) -> bool:
         return False
     logger.info("Download Done")
     
-    # backup & unzip
-    updates:list = []
-    try:
-        with zipfile.ZipFile(src, "r") as zip:
-            updates = zip.namelist()
-            logger.debug(f"Retrieved following updates: \n{updates}")
-
-            # backup old files
-            for update in updates:
-                logger.debug(f"Backing up {update}")
-                try:
-                    update_split  = update.split(".")
-                    os.rename(update, f"{update_split[0].split('/')[1]}__old.{update_split[1]}")
-                except FileExistsError:
-                    logger.error(f"Old {update} present!")
-                    ErrorTracebacks.append(OLD_BACKUP_FILES_PRESENT)
-                except FileNotFoundError:
-                    # probably a new file
-                    continue
-                except PermissionError:
-                    logger.error(f"Permission Denied!")
-                    ErrorTracebacks.append(ACCESS_DENIAL)
-                    return False
-                except Exception:
-                    logger.error("Unknown Error Occured during Backing up!")
-                    ErrorTracebacks.append(UNKNOWN_ERROR)
-                    return False
-                else:
-                    continue
-
-        # extract and place new files
-        logger.info("Starting to unzip")
-        zip.extractall()
-        logger.info("Done unzipping!")
-
-    except PermissionError:
-        logger.error(f"Permission Denied!")
-        ErrorTracebacks.append(ACCESS_DENIAL)
-    except Exception:
-        logger.error("Unknown Error Occured during Update!")
-        ErrorTracebacks.append(UNKNOWN_ERROR)
-        return False
-    else:
-        # mostly update is success
-        logger.info("Update Complete")
-        return True
 
     
 def download(target:str) -> bool:
