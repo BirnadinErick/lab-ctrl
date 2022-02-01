@@ -109,7 +109,7 @@ def update_daemon(src:str, address:str) -> bool:
     # 1. remove the backups
     try:
         logger.debug("Removing backups...")
-        for file in files_to_update.keys():
+        for file in files_need_backup:
             filename, fileext = file.split(".")[0], file.split(".")[1]
             os.remove((filename + "__old" + "." + fileext))
     except PermissionError:
@@ -122,10 +122,14 @@ def update_daemon(src:str, address:str) -> bool:
     else:
         logger.info("Back up sanitized successfully!")
     
-    # 2. release unneccessary memory areas
+    # 2. release unneccessary memory areas immediately
     del update_catalog
     del logger
     del files_to_update
+    del files_need_backup    
+
+    # 3. Remove the update_catalog
+    os.remove(src)
     # end sanitize ---------------------------------------------------------------------------
 
     return True
