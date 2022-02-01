@@ -1,7 +1,7 @@
 # Imports
 import json
 
-from fastapi import FastAPI, Response, status
+from fastapi import FastAPI, Response, status, BackgroundTasks
 
 from contexts import RequestContext
 from commands import shutdown
@@ -20,7 +20,7 @@ async def root():
     return {"message": "Lab Ctrl is running"}
 
 @api.post("/update", status_code=status.HTTP_202_ACCEPTED)
-async def update(req:RequestContext, response:Response):
+async def update(req:RequestContext, response:Response, bgTasks:BackgroundTasks):
     global version
 
     # decrypt the payload
@@ -34,13 +34,10 @@ async def update(req:RequestContext, response:Response):
     if data["ver"] > version:
         up_file = data["up_file"]
 
-    # if update available
-        if not update_daemon(up_file, f"http://{mother}:2003/"):
-            data = {"msg":"update_failed"}    
-        else:
-            version = data["ver"]
-            data = {"msg":"update_ok"}
-        
+        # if update available, update
+        bgTasks.add_task(update_daemon, src=up_file, address=mother)
+
+        data = {"msg": "Updated added to background tasks!"}
         jData = json.dumps(data)
         enc_data, key = encrypt(jData)
 
