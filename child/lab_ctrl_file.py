@@ -6,6 +6,20 @@ import base64
 # BEGIN
 
 def encode(infile:str, outfile:str) -> bool:
+    """
+    takes a file and outputs a lab_ctrl file for communication between the mother and children
+
+    :param infile:  name of the input file to encode
+    :param outfile: name of the output `lab_ctrl` file
+    :return: boolean representing whether encode-process was successful or not!
+    :rtype: bool
+
+    Note:
+        `outfile` is generated regardless of what `infile` is.
+        But by standard, it should be a valid byte-encoded JSON object,
+        which should be able to deserialize to a python object
+
+    """
     contents:bytes
     # get the json contents to a py obj
     try:
@@ -23,7 +37,14 @@ def encode(infile:str, outfile:str) -> bool:
         return True
 
 def decode(infile:str) -> dict:
-    contents:bytes
+    """
+    takes a lab_ctrl file and gives a python object the file was representing
+
+    :param infile:  name of the input file to decode
+    :return: a dict if decode-process was succesful | `None` if failed
+    :rtype: dict | None
+    """
+    contents:bytes      # contents-bytes
     try:
         # get the contents
         with open(infile, "rb") as file:
