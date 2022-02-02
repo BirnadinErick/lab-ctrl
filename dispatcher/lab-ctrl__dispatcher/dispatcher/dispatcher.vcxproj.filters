@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dispatcher.cpp">
+    <ClCompile Include="src\dispatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="power_manage.cpp">
+    <ClCompile Include="src\power_manage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils.cpp">
+    <ClCompile Include="src\utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="power_manage.hpp">
+    <ClInclude Include="src\power_manage.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils.hpp">
+    <ClInclude Include="src\utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
