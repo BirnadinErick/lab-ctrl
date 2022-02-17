@@ -5,7 +5,7 @@ import base64
 
 # BEGIN
 
-def encode(infile:str, outfile:str) -> bool:
+def encode_lab_ctrl(infile:str, outfile:str) -> bool:
     """
     takes a file and outputs a lab_ctrl file for communication between the mother and children
 
@@ -72,7 +72,7 @@ if __name__ == '__main__':
         if op == 1:
             inFile = input("Name of the input: ")
             outFile = input("Name of the output: ")
-            status:bool = encode(inFile+".json", outFile+".lab_ctrl")
+            status:bool = encode_lab_ctrl(inFile+".json", outFile+".lab_ctrl")
             if not status:
                 print("something went wrong during encoding!")
             else:
