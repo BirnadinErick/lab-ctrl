@@ -24,6 +24,8 @@
 			"**/migrations": true,
 			"**/utils": true
 		},
-		"python.pythonPath": "child_env\\Scripts\\python.exe"
+		"python.pythonPath": "child_env\\Scripts\\python.exe",
+		"python.testing.unittestEnabled": true,
+		"python.testing.cwd": ""
 	}
 }

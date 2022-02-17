@@ -1,0 +1,44 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"*.*workspace": true,
+			"**/env/": true
+		},
+		"files.watcherExclude": {
+			"**/__pycache__/": true,
+			"**/env/": true
+		},
+		"search.exclude": {
+			"**/__pycache__/": true,
+			"**/env/": true
+		},
+		"python.linting.ignorePatterns": [
+			"**/site-packages/**/*.py",
+			".vscode/*.py",
+			"**/__pycache__"
+		],
+		"audioCues.enabled": "on"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+
+			{
+				"name": "Run parent",
+				"type": "python",
+				"request": "launch",
+				"program": "${workspaceFolder}\\manage.py",
+				"args": [
+					"runserver",
+					"42003"
+				],
+				"django": true
+			}
+		]
+	}
+}

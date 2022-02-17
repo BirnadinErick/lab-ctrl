@@ -1,0 +1,46 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"*.*workspace": true,
+			"**/*vs*": true,
+			"**/env": true
+		},
+		"files.watcherExclude": {
+			"*.*workspace": true,
+			"**/.vs*": true,
+			"**/env": true
+		},
+		"emmet.excludeLanguages": [
+			"markdown",
+			"html"
+		],
+		"python.linting.ignorePatterns": [
+			"**/site-packages/**/*.py",
+			".vscode/*.py",
+			"**/env/*"
+		],
+		"audioCues.enabled": "on"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Spawn Child",
+				"type": "python",
+				"request": "launch",
+				"module": "uvicorn",
+				"args": [
+					"child:api",
+					"---reload",
+					"42004"
+				],
+				"jinja": true
+			}
+		]
+	}
+}

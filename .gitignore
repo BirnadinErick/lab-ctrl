@@ -1,12 +1,11 @@
 **/__pycache__/
-*.py[cod]
 *$py.class
 *.so
 *.mo
 *.pot
 *.log
-db.sqlite3
-*_env/
+**/*.brain
+**/*env/
 **/Release
 **/Debug
 **/x*
