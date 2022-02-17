@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-US">
+<head>
+    <title>
+        {% firstof title "Lab Ctrl | Manage your local lab with ez!" %}
+    </title>
+    
+    {% comment %} 
+        Neccessary headers compilationa and CSS3 linkage
+    {% endcomment %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <link rel="shortcut icon" href="{% static 'watchdog/images/favicon.png' %}" type="image/png"> {% endcomment %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    
+    {% include 'watchdog/stylesheets.html' %}
+    {% block css %}
+        {% comment %} 
+                Page specific css goes here 
+        {% endcomment %}
+    {% endblock css %}
+</head>
+
+<body class="sidebar-expand">
+    
+    {% comment %} Begin Appbar {% endcomment %}
+    {% include 'watchdog/appbar.html' %}
+    {% comment %} End Appbar {% endcomment %}
+
+    {% comment %} Begin App Header {% endcomment %}
+    {% include 'watchdog/appheader.html' %}
+
+    {% block body %}
+        {% comment %} 
+            Page specific content goes here 
+        {% endcomment %}
+    {% endblock body %}
+
+
+    <div class="overlay"></div>
+
+    <script>
+        {% comment %} Pre process js env {% endcomment %}
+        const mother = "{{mother}}";
+    </script>
+
+{% block js %}
+    {% comment %} 
+        Page specific js goes here 
+    {% endcomment %}
+{% endblock js %}
+    
+</body>
+</html>

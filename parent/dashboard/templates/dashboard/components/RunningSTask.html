@@ -1,0 +1,29 @@
+{% load static %}
+
+<div class="box">
+    <div class="box-body d-flex pb-0">
+        <div class="me-auto">
+            <h5 class="box-title mb-36">
+                {% comment %}
+                    Indicate if any smart task is been run.
+                    If yes, show progress how many children are affected?
+                {% endcomment %}
+                Update: 1.2.3b ⌛
+            </h5>
+            <div class="progress skill-progress mb-10" style="height:10px;">
+                {% comment %}
+                    `width` dictates the amount of completion
+                {% endcomment %}
+                <div class="progress-bar bg-orange progress-animated" style="width: 40%; height:10px;" role="progressbar">
+                    <span class="sr-only">
+                        78% Complete
+                    </span>
+                </div>
+            </div>
+            <p class="fs-16 mb-0 mt-2"><span class="text-primary">
+                12
+            </span>children left to process</p>
+        </div>
+        {% comment %} <h4 class="numb font-wb fs-30">34 Cs Done.</h4> {% endcomment %}
+    </div>
+</div>

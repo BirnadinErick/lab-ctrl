@@ -1,0 +1,37 @@
+{% load static %}
+<div class="sidebar">
+        <div class="sidebar-logo">
+                        <a href="{% url 'dashboard:index' %}">
+                <img src="" alt="lab-ctrl logo">
+            </a>
+            <div class="sidebar-close" id="sidebar-close">
+                <i class='bx bx-left-arrow-alt'></i>
+            </div>
+        </div>
+        <div class="simlebar-sc" data-simplebar>
+            <ul class="sidebar-menu tf">
+               
+                <li>
+                    <a href="{% url 'dashboard:index' %}">
+                        <i class='bx bxs-dashboard' style='color:#b33c86ff'  ></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'smarttasks:index' %}">
+                        <i class='bx bx-dumbbell' style='color:#b33c86ff'></i>
+                        <span>Smart Tasks</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'nursehouse:index' %}">
+                        <i class='bx bx-health bx-spin' style='color:#b33c86ff' ></i>
+                        <span>Nurse House</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>

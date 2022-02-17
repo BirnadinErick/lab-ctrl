@@ -1,0 +1,92 @@
+{% load static %}
+<div class="box card-box">
+    {% comment %} Call to Donate {% endcomment %}
+    <div class="icon-box bg-color-1">
+        <div class="content">
+            <h5 class="title-box">Like Lab-Ctrl?</h5>
+            <p class="color-1 mb-0 pt-4">
+                Donate and support if you can.
+            </p>
+        </div>
+    </div>
+    
+    
+    {% comment %} Error Reports {% endcomment %}
+    <div class="icon-box bg-color-2">
+        <div class="icon bg-icon-2">
+            <i class='bx bxs-bell bx-tada'></i>
+        </div>
+        <div class="content click-c">
+            <h5 class="title-box">Errors</h5>
+            <p class="color-2 mb-0 pt-4">
+                {% comment %} Specify #Errors {% endcomment %}
+                Top {% firstof es_n 5 %} errors
+            </p>
+        </div>
+        {% comment %} Dropdown List upon HoverOver {% endcomment %}
+        <div class="notification-list card">
+            <div class="top box-header">
+                <h5>Unhandled Errors</h5>
+                {% comment %} Title {% endcomment %}
+            </div>
+            
+            <div class="pd-1r">
+                <div class="divider"></div>
+            </div>
+
+            {% comment %} Error Reports {% endcomment %}
+            <div class="box-body">
+                <ul class="list" id="es_list">
+                   <li class="d-flex seen" id="error-load">
+                        <div class="info">
+                            <span href="" class="font-w600 mb-0 color-primary">
+                                Getting your mayhem...
+                            </span>
+                            <p class="pb-0 mb-0 line-h14 mt-6">
+                                    Please wait while I process this🤞
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="btn-view">
+                    <a class="font-w600 h5" href="{% url 'nursehouse:index' %}">
+                        Go to Nurse House
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    
+    {% comment %} Smart Tasks Overview Report {% endcomment %}
+    <div class="icon-box bg-color-3">
+        <a class="create d-flex" href="{% url 'smarttasks:index' %}">
+            <div class="icon bg-icon-3">
+                <i class="bx bx-calendar"></i>
+            </div>
+            <div class="content">
+                <h5 class="title-box">Scheduled Tasks</h5>
+                <p class="color-3 mb-0 pt-4">
+                    {% comment %} Specifiy #SmartTasks {% endcomment %}
+                    15 Smart Tasks
+                </p>
+            </div>
+        </a>
+    </div>
+    
+    
+    {% comment %} Join a new Child {% endcomment %}
+    <div class="icon-box bg-color-4">
+        <a class="create d-flex" href="#" data-toggle="modal" data-target="#add_project">
+            <div class="icon bg-white">
+                <i class="bx bx-plus"></i>
+            </div>
+            <div class="content d-flex align-items-center">
+                <h5 class="color-white">
+                    Join a new child
+                </h5>
+            </div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="main-header">
+    <div class="d-flex">
+        <div class="mobile-toggle" id="mobile-toggle">
+            <i class='bx bx-menu'></i>
+        </div>
+        <div class="main-title">
+            {% firstof page_header title "Lab Ctrl is awesome" %}
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+
+        {% comment %} App wide search {% endcomment %}
+        <form class="app-search d-none d-lg-block">
+            <div class="position-relative">
+                <input type="text" class="form-control" placeholder="Search {{family_name}}">
+                <span class="bx bx-search-alt"></span>
+            </div>
+        </form>
+
+        {% comment %} Logged in user Options {% endcomment %}
+        {% include 'watchdog/user-opts.html' %}
+        
+    </div>
+</div>
