@@ -1,10 +1,10 @@
 # Imports
 from asyncio.log import logger
-from modulefinder import LOAD_CONST
 import subprocess
 import os
 import hashlib
 import logging
+import json
 
 from cryptography.fernet import Fernet
 
@@ -39,7 +39,7 @@ def encrypt(data:str):
     """
     key =Fernet.generate_key()
     fernet = Fernet(key)
-    encryptedData = fernet.encrypt(data.encode())
+    encryptedData = fernet.encrypt(data.encode('utf-8'))
     return encryptedData, key
 
 def decrypt(encData:bytes, key:bytes) -> bytes:
@@ -65,16 +65,19 @@ def download(target:str) -> bool:
         # command to spin up downloader.exe and get the `target`
         logger.debug(f"Downloading {target}...")
         download_proc = subprocess.run(
-                args=["downloader.exe", target],    # cmd to revoke
+                args=f"downloader.exe {target}",    # cmd to revoke
                 check=True,                         # validates whether return code was zero, if not then raises CalledProcessError
                 capture_output=True,                # capture STDOUT/STDERR to get the logs in case of error
                 cwd=os.getcwd(),                    # run in the current-working-directory
                 text=True                           # capture STOUT/STERR in text-mode instead of binary-mode
             )
-    except subprocess.CalledProcessError:
+    # except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as e:
+        logger.debug(e.__str__())
         logger.debug(f"Downloading {target} failed!")
         # record the logs for diagnosis
-        with open(f"download__{target}.log", "x") as log:
+        log_filename:str = f"download__{target.replace('/', '.')}.log"
+        with open(log_filename, "x") as log:
             log.write(download_proc.stdout)
             log.write(download_proc.stderr)
         
@@ -86,17 +89,28 @@ def download(target:str) -> bool:
         logger.debug(f"Successfully downloaded {target}.")
         return True
 
+def construct_response(data:dict) -> dict:
+    """
+    Constructs a response object for the given input data
+
+    Output always has 2 items:
+        1. id: unique identifier for the response
+        2. payload: encrypted json str
+    """
+    input_data: str = json.dumps(data)
+    payload, key = encrypt(input_data)
+    return {"id":key, "payload":payload}
+
+def deconstruct_request(data:dict) -> dict:
+    """
+    Deconstructs a response object for the given input data
+    """
+    data:str = decrypt(data["payload"].encode('utf-8'), data["id"].encode('utf-8'))
+    return json.loads(data)
+
 # END
 
 if __name__ == '__main__':
-
-    # test encrypt/decrypt funcs
-    import json
-    data = {"ver":2.1, "up_file": "update_catalog.lab_ctrl"}
-    data_s = json.dumps(data)
-
-    encData, key = encrypt(data_s)    
-    print(encData)
-    print(key)
+    pass
 
     
