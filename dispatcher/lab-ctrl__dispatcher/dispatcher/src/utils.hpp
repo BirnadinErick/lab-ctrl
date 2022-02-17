@@ -41,5 +41,6 @@ namespace lab_ctrl {
     *   message: string representing message to be logged 
     */
     void Log(std::string message);
-
+    void Log(float message);
+    void Log(DWORDLONG message);
 }

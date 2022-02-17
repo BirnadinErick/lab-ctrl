@@ -80,4 +80,14 @@ namespace lab_ctrl {
         std::cout << message << std::endl;
         return;
     }
+
+    void Log(float message) {
+        std::cout << message << std::endl;
+        return;
+    }
+
+    void Log(DWORDLONG message) {
+        std::cout << message << std::endl;
+        return;
+    }
 }

@@ -20,7 +20,7 @@ namespace lab_ctrl {
     *  ** Forcibly closes all the running processes
     *  ** Displays a warning for user and waits for 30 seconds
     */
-    BOOL shutdown_child()
+    BOOL shutdown_child(BOOL restart)
     {
         HANDLE hToken;      // token handler for the cureent proc token
         
@@ -57,7 +57,7 @@ namespace lab_ctrl {
             TRUE,
             
             // Whther to restart the system after shutdown
-            FALSE
+            restart
         );
 
         if (status)
