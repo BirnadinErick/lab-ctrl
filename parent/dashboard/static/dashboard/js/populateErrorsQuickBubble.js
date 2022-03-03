@@ -1,5 +1,5 @@
 function modifyUI(es) {
-    parent_ul = $('#es_list'); // ui el to modify
+    parent_ul = $('#es_list');
 
     // remove the loading indicator
     parent_ul.empty()
@@ -15,28 +15,18 @@ function modifyUI(es) {
                                     ${e.title}
                             </p>
                         </div>
-                    </li>`
-        parent_ul.append(child_template)
+                    </li>`;
+        parent_ul.append(child_template);
     });
 }
 
-es_tmp = [{
-        "id": 2003,
-        "title": "hey There"
-    },
-    {
-        "id": 2007,
-        "title": "Hello World"
-    }
-]
 
 // get the errors and modify the UI
 async function initErrors() {
     fetch(`http://${mother}/error/get/${es_n}`)
         .then(res => res.json())
-        .then((es) => {
-            console.log(es);
-            modifyUI(es_tmp)
+        .then((res) => {
+            modifyUI(res.es);
         });
 
 }

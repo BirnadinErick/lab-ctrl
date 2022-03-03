@@ -31,15 +31,14 @@ def get_unhandled_crictical_errors(req:HttpRequest, n:int):
     errors_query = Error.objects.filter(isHandled=False, ecode__lt=2000, ecode__gt=1000)[:n]
     es_tmp:list = []
     for error in errors_query:
-        e_tmp:dict
-        victim:object
-        # e_tmp["id"] = error.victim
+        e_tmp:dict = dict()
+        victim:object = object()
 
         code = error.ecode
         # if ecode > 1500, then it belongs to the child
         if code > 1500 and code < 2000:
-            victim = Child.objects.get(ip=error.victim).first()
-            e_tmp["id"] = victim.nickname | victim.ip
+            victim = Child.objects.get(nickname=error.victim)
+            e_tmp["id"] = victim.nickname if victim.nickname else victim.ip
         # if not then belongs to smart task
         elif code > 1000 and code < 1500:
             e_tmp["id"] = STask.objects.get(sid=error.victim).first().name

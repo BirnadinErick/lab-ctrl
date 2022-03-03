@@ -6,9 +6,10 @@ from dashboard.views import DashboardView, meandata
 # BEGIN
 
 app_name = "dashboard"
+api = "api"
 urlpatterns = [
     path('', DashboardView.as_view(), name="index"),
-    path('meandata', meandata, name="meandata"),
+    path(f'{api}/meandata', meandata, name="meandata"),
 
 ]
 

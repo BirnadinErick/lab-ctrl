@@ -169,7 +169,7 @@ let customer_chart = new ApexCharts(document.querySelector("#mean-chart"), meanl
 customer_chart.render()
 
 function populateMeanLoadGraph() {
-    fetch(`http://${mother}/dashboard/meandata`)
+    fetch(`http://${mother}/api/meandata`)
         .then(res => res.json())
         .then((new_data) => {
             customer_chart.updateOptions({
