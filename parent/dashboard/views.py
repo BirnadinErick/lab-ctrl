@@ -8,16 +8,9 @@ from django.conf import settings
 
 from watchdog.models import Child
 from watchdog.utils import get_common_context_data
-from watchdog.metadata.metadata_managers import manage_children_metadata
-from watchdog.metadata.actions_index import GET_CHILDREN_METADATA
+from watchdog.metadata.metadata_managers import manage_children_metadata, manage_stask_metadata
+from watchdog.metadata.actions_index import GET_CHILDREN_METADATA, GET_STASKS_METADATA
 # BEGIN
-
-# dummy mock-api response
-mother_res:dict = {
-    "healthy_children": 12,
-    "total_children": 34,
-}
-
 class DashboardView(TemplateView):
     template_name = "dashboard/dashboard.html"
 
@@ -31,7 +24,8 @@ class DashboardView(TemplateView):
         return {
             **get_common_context_data(), 
             **context,
-            **manage_children_metadata(GET_CHILDREN_METADATA)
+            **manage_children_metadata(GET_CHILDREN_METADATA),
+            **manage_stask_metadata(GET_STASKS_METADATA)
         }
 
 

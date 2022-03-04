@@ -67,7 +67,8 @@
                 {% endcomment %}
                     <div class="col-12">
                         {% comment %} Rogue Children Report {% endcomment %}
-                        {% include 'dashboard/components/RogueChildren.html' %}
+                {% include 'dashboard/components/ActiveChildren.html' %}
+
                     </div>
                    
                 </div>
@@ -76,12 +77,6 @@
             <div class="col-6 col-sm-12">
                 {% comment %} LAN DNS Status Report via a Pie Chart {% endcomment %}
                 {% include 'dashboard/components/LANDNSStatusPieChart.html' %}
-            </div>
-
-
-            <div class="col-6 col-sm-12">
-                {% comment %} Active Children at a Glance {% endcomment %}
-                {% include 'dashboard/components/ActiveChildren.html' %}
             </div>
         </div>
 
@@ -221,6 +216,10 @@
 {% comment %} Pre process env {% endcomment %}
 <script>
     const es_n = {{es_n|safe}}
+    const lwst = {{lwst|safe}}
+    const wst = {{wst|safe}}
+    const rtst = {{rtst|safe}}
+    const stst = {{stst|safe}}
 </script>
 
 <script src="{% static 'watchdog/libs/jquery/jquery.min.js' %}"></script>
@@ -231,5 +230,6 @@
 <script src="{% static 'watchdog/libs/apexcharts/apexcharts.js' %}"></script>
 <script src="{% static 'dashboard/js/populateGraph.js' %}"></script>
 <script src="{% static 'dashboard/js/populateErrorsQuickBubble.js' %}"></script>
+<script src="{% static 'dashboard/js/populateSTasksData.js' %}"></script>
 
 {% endblock js %}
