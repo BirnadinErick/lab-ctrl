@@ -54,30 +54,15 @@
                         {% comment %} Call To Support the project {% endcomment %}
                         {% include 'dashboard/components/CTSupport.html' %}
                     </div>
-                    
-                    {% comment %} <div class="col-6 col-xl-12 col-md-12 col-sm-12">
-                        Miscelleneous Chart Placeholder
-                        {% include 'dashboard/components/Misc.html' %}
-                    </div> {% endcomment %}
-                    
-
-                {% comment %} 
-                    Make room for the misc chart
-                    <div class="col-6 col-xl-12 col-md-12 col-sm-12"> 
-                {% endcomment %}
+ 
                     <div class="col-12">
-                        {% comment %} Rogue Children Report {% endcomment %}
-                {% include 'dashboard/components/ActiveChildren.html' %}
-
+                        {% comment %} Children Report {% endcomment %}
+                        {% include 'dashboard/components/ActiveChildren.html' %}
                     </div>
                    
                 </div>
             </div>
             
-            <div class="col-6 col-sm-12">
-                {% comment %} LAN DNS Status Report via a Pie Chart {% endcomment %}
-                {% include 'dashboard/components/LANDNSStatusPieChart.html' %}
-            </div>
         </div>
 
 
