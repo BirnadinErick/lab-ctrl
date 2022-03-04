@@ -8,20 +8,21 @@
             </h5>
             <div class="d-flex align-items-center">
                 <h4 class="mb-0 font-wb fs-30 mt-23">
-                    34
+                    {{tc}}
                 </h4>
                 <div class="text-primary transaction-caret">
                     <i class="bx bxs-up-arrow"></i>
                     <p class="mb-0 text-primary fs-18 font-w400 mt-14 ml-7">
-                        +0.5%
+                        {% comment %} TODO: Calculate the raise/drop {% endcomment %}
                     </p>
                 </div>
             </div>
         </div>
         <div class=" donut-chart-sale">
             {% comment %} Ratio of completeness between `span` element without any excess characters {% endcomment %}
-            <span class="donut-1 healthy-percent" data-peity='{ "fill": ["#3C21F7", "rgba(236, 236, 236, 1)"],   "innerRadius": 27, "radius": 10}'>7/9</span>
-            <small class="healthy-percent">76%</small>
+            <span class="donut-1 healthy-percent" data-peity='{ "fill": ["#3C21F7", "rgba(236, 236, 236, 1)"],   "innerRadius": 27, "radius": 10}'>{{hc}}/{{tc}}</span>
+            {% comment %} TODO: Caculate the percent {% endcomment %}
+            <small class="healthy-percent">{% widthratio hc tc 100%}%</small>
         </div>
     </div>
 </div>

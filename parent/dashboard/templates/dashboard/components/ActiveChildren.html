@@ -11,14 +11,18 @@
                 <div class="d-flex bd-highlight">
     
                     <div class="user_info">
-                        <a class="h6" href="message.html">
-                            {% comment %} Child NickName {% endcomment %}
-                            Ralph
-                        </a>
-                        <p class="fs-14 mb-0">
-                            {% comment %} Child IP {% endcomment %}
-                            192.138.1.52
-                        </p>
+                        {% for child in children %}
+                            <a class="h6" href="message.html">
+                                {% comment %} Child NickName {% endcomment %}
+                                {% firstof child.nickname 'Unnamed Child' %}    
+                            </a>
+                            <p class="fs-14 mb-0">
+                                {% comment %} Child IP {% endcomment %}
+                                {{child.ip}}
+                            </p>
+                        {% empty %}
+                            No Child So far
+                        {% endfor %}
                     </div>
                 </div>
             </li>

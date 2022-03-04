@@ -1,0 +1,15 @@
+current stask
+	details
+
+stasks stats
+1. week
+	how many this week
+	compare with last week
+2. today
+	how many
+	compare last week
+
+LAN report
+top domains
+
+rogue children
