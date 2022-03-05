@@ -1,18 +1,19 @@
-/*
-Author       : Dreamguys
-Template Name: SmartHR - Bootstrap Admin Template
-Version      : 3.6
-*/
+function updateSteps(e, ui) {
+    console.log("Something happened");
+    id = $(".kanban-wrap").sortable("toArray")
+    console.log(id);
+
+
+}
 
 $(document).ready(function() {
-
-
 
     if ($('.kanban-wrap').length > 0) {
         $(".kanban-wrap").sortable({
             connectWith: ".kanban-wrap",
             handle: ".kanban-box",
-            placeholder: "drag-placeholder"
+            placeholder: "drag-placeholder",
+            update: updateSteps
         });
     }
 

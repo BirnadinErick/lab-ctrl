@@ -12,43 +12,18 @@
                         <div class="box-header">
                             <h4 class="box-title">Smart Tasks in {{family}}</h4>
                             <div class="box-right d-flex">
-                                <a class="btn" href="project-details.html">Project Details</a>
-                                <div class="icon-ratting">
-                                    <i class='bx bxs-star'></i>
-                                </div>
+                                <a class="btn" id="new-task-btns" href="" data-toggle="modal" data-target="#add_project">New Smart Task</a>
+                                
                                 <div class="dropdown ml-14">
                                     <a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class='bx bx-dots-vertical-rounded fs-22'></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="bx bx-trash"></i> Delete</a>
-                                        <a class="dropdown-item" href="#"><i class="bx bx-edit mr-5"></i>Edit</a>
+                                        <a class="dropdown-item" href="#"><i class="bx bx-edit mr-5"></i>Settings</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="box-body d-flex justify-content-between pb-0">
-                            <div class="team-name">
-                                <a href="#" class="team">
-                                    <div class="icon"><i class="fas fa-tags"></i></div>
-                                    <h5>Team Name</h5>
-                                </a>
-                            </div>
-                            <div class="action">
-                                <a href="#" class="comment">32 Comments</a>
-                                <a href="#" class="edit">Edit</a>
-                                <a href="#" class="invite"><i class="fas fa-user-plus mr-5"></i>Invite People</a>
-                                <a href="#" class="add">New<i class="fas fa-caret-down pl-12"></i></a>
-                            </div>
-                            <ul class="user-list s2">
-                                <li><img src="./images/avatar/team-1.png" alt="user"></li>
-                                <li><img src="./images/avatar/team-2.png" alt="user"></li>
-                                <li><img src="./images/avatar/team-3.png" alt="user"></li>
-                                <li><img src="./images/avatar/team-4.png" alt="user"></li>
-                                <li><img src="./images/avatar/team-5.png" alt="user"></li>
-                                <li class="total"><span>+4</span></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -58,204 +33,52 @@
                             <div class="kanban-cont">
                                 <div class="kanban-list kanban-list-to-do">
                                     <div class="kanban-header">
-                                        <h6 class="card-title">To-Do List</h6>
+                                        <h6 class="card-title">Shutdown All Children</h6>
                                         <div class="dropdown">
                                             <a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-h"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_card_modal"><i class="bx bx-cog"></i> Edit</a>
+                                                <a class="dropdown-item" href="#"><i class="bx bx-git-commit"></i> Commit</a>
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="bx bx-trash"></i> Delete</a>
-                                                <a class="dropdown-item" href="#">Edit</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="kanban-wrap">
-                                        <div class="panel">
-                                            <div class="kanban-box item-box">
-                                                <div class="dropdown edit">
-                                                    <a href="#" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="bx bx-trash"></i> Delete</a>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_card_modal"><i class="bx bx-edit mr-5"></i>Edit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="img-box">
-                                                    <img src="./images/to-do-list/project-1.png" alt="">
-                                                </div>
-                                                <div class="content-box">
-                                                    <h6 class="title fs-16">Food Website hero area</h6>
-                                                    <div class="progress skill-progress mt-15 mb-15" style="height:7px;">
-                                                        <div class="progress-bar progress-animated" style="width: 78%; height:7px;" role="progressbar">
-                                                            <span class="sr-only">78% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="link"><a href="#"><i class="fas fa-paperclip"></i></a></div>
-                                                        <div class="time">
-                                                            <p class="font-main mb-0"><i class="far fa-clock"></i>Due in 5 days</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="btn-add-card">
-                                        <a class="dropdown-item font-w500 fs-16" href="#" data-toggle="modal" data-target="#add_card_modal"><i class="fas fa-plus mr-14"></i>Add a card</a>
-                                    </div>
-                                </div>
-                                <div class="kanban-list kanban-progress">
-                                    <div class="kanban-header">
-                                        <h6 class="card-title">In Progress</h6>
-                                    </div>
-                                    <div class="kanban-wrap">
-                                        <div class="panel">
-                                            <div class="kanban-box item-box">
-                                                <div class="dropdown edit">
-                                                    <a href="#" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="bx bx-trash"></i> Delete</a>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_card_modal"><i class="bx bx-edit mr-5"></i>Edit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="img-box">
-                                                    <img src="./images/to-do-list/project-2.png" alt="">
-                                                </div>
-                                                <div class="content-box">
-                                                    <h6 class="title fs-16">Food Website hero area</h6>
-                                                    <div class="progress skill-progress mt-15 mb-15" style="height:7px;">
-                                                        <div class="progress-bar progress-animated" style="width: 78%; height:7px;" role="progressbar">
-                                                            <span class="sr-only">78% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="link"><a href="#"><i class="fas fa-paperclip"></i></a></div>
-                                                        <div class="time">
-                                                            <p class="font-main mb-0"><i class="far fa-clock"></i>Due in 5 days</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel">
-                                            <div class="kanban-box item-box">
-                                                <div class="dropdown edit">
-                                                    <a href="#" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="bx bx-trash"></i> Delete</a>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_card_modal"><i class="bx bx-edit mr-5"></i>Edit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="img-box">
-                                                    <img src="./images/to-do-list/project-3.png" alt="">
-                                                </div>
-                                                <div class="content-box">
-                                                    <h6 class="title fs-16">Food Website hero area</h6>
-                                                    <div class="progress skill-progress mt-15 mb-15" style="height:7px;">
-                                                        <div class="progress-bar progress-animated" style="width: 78%; height:7px;" role="progressbar">
-                                                            <span class="sr-only">78% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="link"><a href="#"><i class="fas fa-paperclip"></i></a></div>
-                                                        <div class="time">
-                                                            <p class="font-main mb-0"><i class="far fa-clock"></i>Due in 5 days</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="btn-add-card">
-                                        <a class="dropdown-item font-w500 fs-16" href="#" data-toggle="modal" data-target="#add_card_modal"><i class="fas fa-plus mr-14"></i>Add a card</a>
-                                    </div>
-                                </div>
-                                <div class="kanban-list kanban-review">
-                                    <div class="kanban-header">
-                                        <h6 class="card-title">In Review</h6>
-                                    </div>
-                                    <div class="kanban-wrap">
-                                        <div class="panel">
-                                            <div class="kanban-box item-box">
-                                                <div class="dropdown edit">
-                                                    <a href="#" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="bx bx-trash"></i> Delete</a>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_card_modal"><i class="bx bx-edit mr-5"></i>Edit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="img-box">
-                                                    <img src="./images/to-do-list/project-4.png" alt="">
-                                                </div>
-                                                <div class="content-box">
-                                                    <h6 class="title fs-16">Food Website hero area</h6>
-                                                    <div class="progress skill-progress mt-15 mb-15" style="height:7px;">
-                                                        <div class="progress-bar progress-animated" style="width: 78%; height:7px;" role="progressbar">
-                                                            <span class="sr-only">78% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="link"><a href="#"><i class="fas fa-paperclip"></i></a></div>
-                                                        <div class="time">
-                                                            <p class="font-main mb-0"><i class="far fa-clock"></i>Due in 5 days</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="btn-add-card">
-                                        <a class="dropdown-item font-w500 fs-16" href="#" data-toggle="modal" data-target="#add_card_modal"><i class="fas fa-plus mr-14"></i>Add a card</a>
-                                    </div>
-                                </div>
-                                <div class="kanban-list kanban-approved">
-                                    <div class="kanban-header">
-                                        <h6 class="card-title">Approved</h6>
-                                    </div>
-                                    <div class="kanban-wrap">
-                                        <div class="panel">
-                                            <div class="kanban-box item-box">
-                                                <div class="dropdown edit">
-                                                    <a href="#" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="bx bx-trash"></i> Delete</a>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_card_modal"><i class="bx bx-edit mr-5"></i>Edit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="img-box">
-                                                    <img src="./images/to-do-list/project-4.png" alt="">
-                                                </div>
-                                                <div class="content-box">
-                                                    <h6 class="title fs-16">Food Website hero area</h6>
-                                                    <div class="progress skill-progress mt-15 mb-15" style="height:7px;">
-                                                        <div class="progress-bar progress-animated" style="width: 78%; height:7px;" role="progressbar">
-                                                            <span class="sr-only">78% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="link"><a href="#"><i class="fas fa-paperclip"></i></a></div>
-                                                        <div class="time">
-                                                            <p class="font-main mb-0"><i class="far fa-clock"></i>Due in 5 days</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="btn-add-card">
-                                        <a class="dropdown-item font-w500 fs-16" href="#" data-toggle="modal" data-target="#add_card_modal"><i class="fas fa-plus mr-14"></i>Add a card</a>
-                                    </div>
-                                </div>
 
+                                        <div class="panel" id="1">
+                                            <div class="kanban-box item-box">
+                                                <div class="dropdown edit">
+                                                    <a href="#" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_card_modal"><i class="bx bx-edit mr-5"></i>Edit</a>
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_project"><i class="bx bx-trash"></i> Delete</a>
+                                                    </div>
+                                                </div>
+                                                <div class="content-box">
+                                                    <h6 class="title fs-16">Request Children to Shutdown</h6>
+                                                    {% comment %} Add targets here {% endcomment %}
+                                                    <p>
+                                                        Hello world! these are the targets
+                                                    </p>
+                                                    <div class="d-flex justify-content-between">
+                                                        {% comment %} <div class="link"><a href="#"><i class='bx bx-window-close' ></i></a></div> {% endcomment %}
+                                                        <div class="time">
+                                                            <p class="font-main mb-0"><i class="far fa-clock"></i>Cron</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="btn-add-card">
+                                        <a class="dropdown-item font-w500 fs-16" href="#" data-toggle="modal" data-target="#add_card_modal"><i class="fas fa-plus mr-14"></i>Add a step</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -263,93 +86,53 @@
             </div>
 
             <div id="add_project" class="modal custom-modal fade" role="dialog">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
+                    <form id="new-task-form">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Create Project</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title">Add New Smart Task</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-new-task-wizard">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <form>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>Project Name</label>
-                                            <input class="form-control" value="" type="text">
+                                            <label>Smart Name</label>
+                                            <input id="new-smart-name" class="form-control" value="" type="text">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Client</label>
-                                            <select class="select">
-                                                <option>Client 1</option>
-                                                <option>Client 2</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
+                                
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>Start Date</label>
-                                            <div class="cal-icon">
-                                                <input class="form-control " type="date">
-                                            </div>
+                                            <label>Target Time in cron format</label>
+                                            <input id="new-cron" placeholder="* * * * *" class="form-control" value="" type="text">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>End Date</label>
-                                            <div class="cal-icon">
-                                                <input class="form-control " type="date">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Rate</label>
-                                            <input placeholder="$50" class="form-control" value="" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>&nbsp;</label>
-                                            <select class="select">
-                                                <option>Hourly</option>
-                                                <option selected>Fixed</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Priority</label>
-                                            <select class="select">
-                                                <option selected>High</option>
-                                                <option>Medium</option>
-                                                <option>Low</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea rows="4" class="form-control" placeholder="Enter your message here"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Upload Files</label>
-                                    <input class="form-control" type="file">
+                                    <label>Smart Data</label>
+                                    <textarea rows="8" id="new-smart-data" class="form-control" placeholder="Give the Smart Data">
+{
+    "target": "*",
+    "steps": []
+}
+                                    </textarea>
                                 </div>
                                 <div class="submit-section">
-                                    <button class="btn btn-primary submit-btn">Save</button>
+                                    <button id="new-task-compute" class="btn btn-primary submit-btn">Compute</button>
                                 </div>
-                            </form>
                         </div>
                     </div>
+                    </form>
                 </div>
+            </form>
             </div>
             <div class="modal custom-modal fade" id="delete_project" role="dialog">
                 <div class="modal-dialog modal-dialog-centered">
@@ -397,7 +180,7 @@
                                     </div>
                                 </div>
                                 <div class="submit-section text-center">
-                                    <button class="btn btn-primary submit-btn">Submit</button>
+                                    <button class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -415,21 +198,21 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <label>Image Card</label>
+                                    <label>Steps File</label>
                                     <input class="form-control" type="file">
                                 </div>
                                 <div class="form-group">
-                                    <label>Card Name</label>
+                                    <label>Smart Name</label>
                                     <input type="text" class="form-control" value="">
                                 </div>
                                 <div class="form-group">
-                                    <label>Due Date</label>
+                                    <label>Cron</label>
                                     <div class="cal-icon">
                                         <input class="form-control " type="date" value="">
                                     </div>
                                 </div>
                                 <div class="submit-section text-center">
-                                    <button class="btn btn-primary submit-btn">Submit</button>
+                                    <button class="btn btn-primary submit-btn">Process</button>
                                 </div>
                             </form>
                         </div>
@@ -439,3 +222,16 @@
         </div>
     </div>
 {% endblock body %}
+
+{% block js %}
+    
+    <script src="{% static 'watchdog/libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'watchdog/libs/jquery/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'watchdog/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'watchdog/libs/owl.carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'watchdog/libs/bootstrap/js/bootstrap.min.js' %}"></script>
+    
+    {% comment %} App specific js files {% endcomment %}
+    <script src="{% static 'smarttasks/js/newTask.js' %}"></script>
+    <script src="{% static 'smarttasks/js/app.js' %}"></script>
+{% endblock js %}
