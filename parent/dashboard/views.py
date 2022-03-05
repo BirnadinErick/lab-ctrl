@@ -17,12 +17,10 @@ class DashboardView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["es_n"] = settings.ERROR_DASHBOARD_COUNT
-        context["title"] = "Dashboard | Lab Ctrl"
-        context["page_header"] = "Dashboard of Aden" # aqquire family name and display
         context["children"] = Child.objects.all().order_by('nickname', 'ip')
         
         return {
-            **get_common_context_data(), 
+            **get_common_context_data(title="Dashboard | Lab Ctrl",page_header="Dashboard of Aden"), 
             **context,
             **manage_children_metadata(GET_CHILDREN_METADATA),
             **manage_stask_metadata(GET_STASKS_METADATA)
