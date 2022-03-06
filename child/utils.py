@@ -8,6 +8,7 @@ import json
 from cryptography.fernet import Fernet
 
 from ERRORCODES import UPDATE_SRC_RETRIEVAL_FAILED
+from contexts import RequestContext
 
 # BEGIN
 
@@ -100,11 +101,11 @@ def construct_response(data:dict) -> dict:
     payload, key = encrypt(input_data)
     return {"id":key, "payload":payload}
 
-def deconstruct_request(data:dict) -> dict:
+def deconstruct_request(data:RequestContext) -> dict:
     """
     Deconstructs a response object for the given input data
     """
-    data:str = decrypt(data["payload"].encode('utf-8'), data["id"].encode('utf-8'))
+    data:str = decrypt(data.payload.encode('utf-8'), data.id.encode('utf-8'))
     return json.loads(data)
 
 # END
