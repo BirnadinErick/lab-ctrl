@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 from watchdog.utils import get_common_context_data
 from smarttasks.models import STask
 from smarttasks.utils import parse_instructions
+from smarttasks.task_workers.scheduler import scheduler
+
 # BEGIN
 
 class SmartTasksIndexView(TemplateView):
@@ -16,11 +18,14 @@ class SmartTasksIndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        scheduler.add_job(
+            print, 'cron', ["hello world from views.py"], second="*/10"
+        )
         return {
             **context, 
             **get_common_context_data(title="SMART TASKS | Aden", page_header="Smart Tasks in Aden")
         }
+
     
 
 # begin add new stask --------------------------------------------------------
