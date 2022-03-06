@@ -18,8 +18,7 @@ class AppUser(models.Model):
 class Child(models.Model):
 
     cid = models.UUIDField(_("Unique Child ID"), primary_key=True, default=uuid4, editable=False)
-    nickname = models.CharField(_("Nickname"), max_length=50, blank=True)
-    ip = models.GenericIPAddressField(_("IP-Addr of the child"), protocol="both", unpack_ipv4=True, blank=False, unique=True)
+    ip = models.CharField(_("IP-Addr of the child"), blank=False, unique=True, max_length=15)
     isIPStatic = models.BooleanField(_("Is the IP Static or not?"), blank=False)
     nurse_check_interval = models.IntegerField(_("Nurse Check Interval Value"), blank=False)
     nurse_check_type = models.IntegerField(_("Nurse Check Type"), blank=False)

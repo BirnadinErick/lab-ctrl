@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from watchdog.utils import get_common_context_data
 from smarttasks.models import STask
+from smarttasks.utils import parse_instructions
 # BEGIN
 
 class SmartTasksIndexView(TemplateView):
@@ -36,7 +37,7 @@ def add_smart_task(req:HttpRequest) -> JsonResponse:
         # create new STask
         stask_new = STask(
             name=data["name"],
-            instructions=data["data"]
+            instructions=parse_instructions(data["data"])
         )
         # commit it
         stask_new.save()
