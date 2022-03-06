@@ -48,7 +48,9 @@ def parse_instructions(sdata:str) -> str:
         if len(targets) != 1:
             raise Exception("invalid targets value")
     else:
-        __validate_targets(targets)
+        # TODO: uncomment, commented for testing purposes
+        # __validate_targets(targets)
+        pass
 
     __validaet_steps(steps) # steps
     

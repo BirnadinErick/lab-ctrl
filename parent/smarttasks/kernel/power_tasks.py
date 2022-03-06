@@ -13,9 +13,9 @@ async def __send_code(session:aiohttp.ClientSession, target:str, code:int, log:l
     request = construct_request({"code":code})
     try:
         log.debug(f"Requesting {target}...")
-        response = await session.post(f"http://{target}:42004", json=request)
-        if response.status_code != 202:
-            log.error(f"{target} returned: {response.status_code}")
+        response = await session.post(f"http://{target}:42004/act", json=request)
+        if response.status != 202:
+            log.error(f"{target} returned: {response.status}")
             log.error(f"{target}'s response body:{response.json()}")
         else:
             log.info(f"Child {target} returned 202")
@@ -40,7 +40,7 @@ async def shutdown(targets:list):
         ops = []
         for target in targets:
             log.debug(f"spawning target {target}...")
-            status, _ = asyncio.ensure_future(
+            status, _ = await asyncio.ensure_future(
                 __send_code(session, target, 1, log)
             )
             ops.append((status, _))

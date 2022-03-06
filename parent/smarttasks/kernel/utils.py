@@ -40,7 +40,7 @@ def construct_request(data:dict) -> dict:
     """
     input_data: str = json.dumps(data)
     payload, key = encrypt(input_data)
-    return {"id":key, "payload":payload}
+    return {"id":key.decode('utf-8'), "payload":payload.decode('utf-8')}
 
 def deconstruct_response(data:dict) -> dict:
     """
