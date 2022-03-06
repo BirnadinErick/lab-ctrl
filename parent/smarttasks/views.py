@@ -54,7 +54,6 @@ def add_smart_task(req:HttpRequest) -> JsonResponse:
         )
 
     except Exception as e:
-        print(e)
         return HttpResponseServerError()
     else:
         return JsonResponse({"msg":"1"})
