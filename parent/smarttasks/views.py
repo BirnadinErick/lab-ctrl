@@ -5,11 +5,13 @@ from typing import Dict
 from django.http import JsonResponse, HttpRequest, HttpResponseNotAllowed, HttpResponseServerError
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
+from apscheduler.triggers.cron import CronTrigger
 
+from smarttasks.kernel.worker import master
 from watchdog.utils import get_common_context_data
 from smarttasks.models import STask
 from smarttasks.utils import parse_instructions
-from smarttasks.task_workers.scheduler import scheduler
+from smarttasks.kernel.scheduler import scheduler
 
 # BEGIN
 
@@ -18,9 +20,6 @@ class SmartTasksIndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        scheduler.add_job(
-            print, 'cron', ["hello world from views.py"], second="*/10"
-        )
         return {
             **context, 
             **get_common_context_data(title="SMART TASKS | Aden", page_header="Smart Tasks in Aden")
@@ -48,8 +47,14 @@ def add_smart_task(req:HttpRequest) -> JsonResponse:
         stask_new.save()
 
         # schedule it accordingly
+        scheduler.add_job(
+            master,
+            CronTrigger.from_crontab(data["cron"]),
+            [stask_new.sid],
+        )
 
     except Exception as e:
+        print(e)
         return HttpResponseServerError()
     else:
         return JsonResponse({"msg":"1"})

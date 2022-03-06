@@ -1,7 +1,7 @@
 # Imports
 from django.apps import AppConfig
 
-from smarttasks.task_workers.scheduler import scheduler
+from smarttasks.kernel.scheduler import scheduler
 
 # BEGIN
 
