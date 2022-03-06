@@ -3,9 +3,11 @@ from typing import Dict
 from uuid import UUID
 import logging
 import json
+import asyncio
 
 from smarttasks.models import STask
 from smarttasks.kernel.power_tasks import *
+from watchdog.models import Child
 
 # BEGIN
 
@@ -16,9 +18,8 @@ TASKS:Dict = {
 
 # begin master --------------------------------------------------------
 def master(id:UUID) -> None:
-    # instantiate a logger
     log = logging.getLogger(f"smarttasks.master::{id.hex}")
-    # get the stask
+
     try:
         stask:STask = STask.objects.get(sid=id)
     except Exception as e:
@@ -27,14 +28,13 @@ def master(id:UUID) -> None:
     instructions:Dict = json.loads(stask.instructions)
     targets, steps = instructions["targets"], instructions["steps"]
 
+    if targets[0] == "*":
+        targets = [c.ip for c in Child.objects.all()]
+
     for step in steps:
         log.info(f"Running step {step}")
-        status:bool = TASKS[step](targets)
-        if status:
-            log.debug(f"Step {step} returned success code")
-            continue
-        else:
-            log.error(f"Step {step} returned error code")
+        asyncio.run(TASKS[step](targets))
+
 # end master ----------------------------------------------------------
     
 

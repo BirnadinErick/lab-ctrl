@@ -1,5 +1,4 @@
 # Imports
-from asyncio.log import logger
 import subprocess
 import os
 import hashlib
