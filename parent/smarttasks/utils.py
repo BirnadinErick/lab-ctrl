@@ -53,7 +53,7 @@ def parse_instructions(sdata:str) -> str:
     __validaet_steps(steps) # steps
     
     # after all the validations are checked, the user-input is safe to store
-    return json.dumps({"steps": steps})
+    return json.dumps({"steps": steps, "targets":targets})
 # end parse_instructions ----------------------------------------------------------
 
 # END
