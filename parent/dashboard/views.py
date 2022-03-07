@@ -17,7 +17,7 @@ class DashboardView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["es_n"] = settings.ERROR_DASHBOARD_COUNT
-        context["children"] = Child.objects.all().order_by('nickname', 'ip')
+        context["children"] = Child.objects.all().order_by('ip')
         
         return {
             **get_common_context_data(title="Dashboard | Lab Ctrl",page_header="Dashboard of Aden"), 

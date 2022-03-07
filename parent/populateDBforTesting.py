@@ -5,6 +5,7 @@ from random import choice, randint
 import logging
 
 from django.db.models import Model
+from django.conf import settings
 
 from watchdog.models import Child
 from smarttasks.models import STask
@@ -16,7 +17,7 @@ victims = []
 
 logging.basicConfig(
     level=logging.DEBUG,
-    format="[%(name)s] %(msg)s"
+    format=settings.LOGGER_FORMAT
 )
 logger = logging.getLogger("Populate_DB")
 
@@ -36,12 +37,8 @@ def is_child(obj:Model) -> bool:
 # Populate Children Records
 def populateChildren():
     logger.info("Populating children...")
-    nicknames = "lina.lana.mina.miana.elsa.maya.ralph.poko.soku.bella".split(".")
-    logger.debug(f"Following children will be populated:-\n\t{nicknames}\n")
     for i in range(10):
-        child_nickname = nicknames[i]
         c:Child = Child(
-            nickname=child_nickname,
             ip=f"192.168.1.{i}",
             isIPStatic=choice([True, False]),
             nurse_check_interval=randint(1,3),
@@ -50,7 +47,6 @@ def populateChildren():
         logger.debug(
             f"""
                 Child {i}
-                nickname: {c.nickname}
                 ip: {c.ip}
                 isIPStatic: {c.isIPStatic}
                 nurse_check_interval: {c.nurse_check_interval}
@@ -59,8 +55,6 @@ def populateChildren():
         )
         c.save()
         victims.append(c.ip)
-        logger.info(f"Appended {c.nickname} to victims list")
-
 
 # Populate STasks Records
 def populateSTasks():

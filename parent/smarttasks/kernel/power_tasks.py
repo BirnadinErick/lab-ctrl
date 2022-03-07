@@ -13,15 +13,15 @@ async def __send_code(session:aiohttp.ClientSession, target:str, code:int, log:l
     request = construct_request({"code":code})
     try:
         log.debug(f"Requesting {target}...")
-        response = await session.post(f"http://{target}:42004/act", json=request)
-        if response.status != 202:
-            log.error(f"{target} returned: {response.status}")
-            log.error(f"{target}'s response body:{response.json()}")
-        else:
-            log.info(f"Child {target} returned 202")
-            json_res = await response.json()
-            if json_res["msg"] != 1:
-                log.error(f"Something went wrong with {target} ")
+        async with session.post(f"http://{target}:42004/act", json=request) as response:
+            if response.status != 202:
+                log.error(f"{target} returned: {response.status}")
+                log.error(f"{target}'s response body:{response.json()}")
+            else:
+                log.info(f"Child {target} returned 202")
+                json_res = await response.json()
+                if json_res["msg"] != 1:
+                    log.error(f"Something went wrong with {target} ")
     except Exception as e:
         log.error(f"Exception raised when processing {target}" + e.__str__())
         return False, target

@@ -1,5 +1,6 @@
 # Imports
 from typing import Dict
+from uuid import UUID
 
 from django.http import JsonResponse, HttpRequest
 
@@ -37,8 +38,12 @@ def get_unhandled_crictical_errors(req:HttpRequest, n:int):
         code = error.ecode
         # if ecode > 1500, then it belongs to the child
         if code > 1500 and code < 2000:
-            victim = Child.objects.get(nickname=error.victim)
-            e_tmp["id"] = victim.nickname if victim.nickname else victim.ip
+            if type(error.victim) == str:
+                print(error.victim)
+                victim = Child.objects.get(ip=error.victim)
+                e_tmp["id"] =  victim.ip
+            elif type(error.victim) == UUID:
+                e_tmp["id"] = STask.objects.get(sid=error.victim).first().name
         # if not then belongs to smart task
         elif code > 1000 and code < 1500:
             e_tmp["id"] = STask.objects.get(sid=error.victim).first().name
